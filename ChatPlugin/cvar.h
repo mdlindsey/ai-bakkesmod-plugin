@@ -123,6 +123,25 @@ class Cvar {
         cvar.setValue(cvarVal);
     }
 
+    void RenderCheckbox(string label="", int width=64)
+    {
+        auto cvar = Global::CvarManager->getCvar(this->name);
+        auto cvarVal = cvar.getBoolValue();
+        ImGui::PushItemWidth(width);
+		ImGui::Checkbox(label.c_str(), &cvarVal);
+        cvar.setValue(cvarVal);
+    }
+
+    void RenderTextArea(string label="", int width=256)
+    {
+        auto cvar = Global::CvarManager->getCvar(this->name);
+        string cvarVal = cvar.getStringValue();
+        ImGui::Text(label.c_str());
+        ImGui::PushItemWidth(width);
+        ImGui::InputTextMultiline(string("##" + this->name).c_str(), &cvarVal);
+        cvar.setValue(cvarVal);
+    }
+
     void RenderSliderInput(string label="", int width=256, bool labelNewLine = false)
     {
         if (this->type != DataType::Int && this->type != DataType::Float)

@@ -8,7 +8,7 @@
 #include "bakkesmod/plugin/pluginwindow.h"
 #include "bakkesmod/plugin/PluginSettingsWindow.h"
 
-class BakkesPlugin: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::Plugin::PluginSettingsWindow
+class ChatPlugin: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod::Plugin::PluginSettingsWindow
 {
 	// Inherited via PluginSettingsWindow
 	string GetPluginName() override;
@@ -21,4 +21,8 @@ class BakkesPlugin: public BakkesMod::Plugin::BakkesModPlugin, public BakkesMod:
 
 	// Game event hooks
 	void onFocusChange(ServerWrapper caller, void* params, string eventName);
+	void onChatMessage(ServerWrapper caller, void* params, string eventName);
+
+	// LLM Functionality
+	void handleChatMessage(string message, string author);
 };
